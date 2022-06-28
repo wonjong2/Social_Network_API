@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const reactionSchema = require('./Reaction');
 
 // Schema to create Thought model
 const thoughtSchema = new Schema(
@@ -28,6 +29,7 @@ const thoughtSchema = new Schema(
 );
 
 // Getter for createdAt property
+// helper????
 function timeStamp() {
     //////////////////////////////////////////////
     // Need to impmement to return proper format
