@@ -26,7 +26,9 @@ module.exports = {
             .catch((err) => res.status(500).json(err));
     },
     removeThought(req, res) {
-
+        Thought.deleteOne({ _id: req.params.thoughtId })
+            .then((result) => res.json(result))
+            .catch((err) => res.status(500).json(err));
     },
     createReaction(req, res) {
 

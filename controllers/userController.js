@@ -26,7 +26,9 @@ module.exports = {
             .catch((err) => res.status(500).json(err));
     },
     removeUser(req, res) {
-
+        User.deleteOne({ _id: req.params.userId })
+            .then((result) => res.json(result))
+            .catch((err) => res.status(500).json(err));
     },
     addFriend(req, res) {
 
