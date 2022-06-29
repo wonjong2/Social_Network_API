@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const reactionSchema = require('./Reaction');
+const { timeStamp } = require('../utils/date');
 
 // Schema to create Thought model
 const thoughtSchema = new Schema(
@@ -24,18 +25,10 @@ const thoughtSchema = new Schema(
     {
         toJSON: {
             virtuals: true,
+            getters: true,
         }
     }
 );
-
-// Getter for createdAt property
-// helper????
-function timeStamp() {
-    //////////////////////////////////////////////
-    // Need to impmement to return proper format
-    //////////////////////////////////////////////
-    return this.createAt;
-}
 
 // Create a virtual property 'friendCount' that gets the number of friends per a user
 thoughtSchema

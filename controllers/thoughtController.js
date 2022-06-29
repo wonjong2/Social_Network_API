@@ -8,7 +8,6 @@ module.exports = {
     },
     createThought(req, res) {
         Thought.create(req.body)
-            // .then((thoughtData) => res.json(thoughtData))
             .then((thoughtData) =>
                 User.findOneAndUpdate(
                     { _id: req.body.userId },
@@ -38,7 +37,17 @@ module.exports = {
     },
     removeThought(req, res) {
         Thought.deleteOne({ _id: req.params.thoughtId })
-            .then((result) => res.json(result))
+            // .then((result) => res.json(result))
+            .then((resutl) => User.findOneAndUpdate(
+                { thoughts: req.params.thoughtId },
+                { $pull: { thoughts: req.params.thoughtId } },
+                { new: true },
+            ))
+            .then((userData) =>
+                !userData
+                    ? res.status(404).json({ messsage: 'No user found with that thought' })
+                    : res.json(userData)
+            )
             .catch((err) => res.status(500).json(err));
     },
     createReaction(req, res) {

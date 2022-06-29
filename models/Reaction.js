@@ -1,4 +1,5 @@
-const { Schema, model, Types } = require('mongoose');
+const { Schema, Types } = require('mongoose');
+const { timeStamp } = require('../utils/date');
 
 const reactionSchema = new Schema(
     {
@@ -20,16 +21,12 @@ const reactionSchema = new Schema(
             default: Date.now,
             get: timeStamp,
         }
+    },
+    {
+        toJSON: {
+            getters: true,
+        }
     }
 );
-
-// Getter for createdAt property
-// helper????
-function timeStamp() {
-    //////////////////////////////////////////////
-    // Need to impmement to return proper format
-    //////////////////////////////////////////////
-    return this.createAt;
-}
 
 module.exports = reactionSchema;
