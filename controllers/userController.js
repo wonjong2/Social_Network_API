@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User, Thought } = require('../models');
 
 module.exports = {
     getAllUsers(req, res) {
@@ -8,7 +8,10 @@ module.exports = {
     },
     getSingleUser(req, res) {
         User.findById(req.params.userId)
-            .then((user) => res.json(user))
+            .then((user) =>
+                !user
+                    ? res.status(404).json({ messsage: 'No user with that ID' })
+                    : res.json(user))
             .catch((err) => res.status(500).json(err));
     },
     createUser(req, res) {
@@ -22,12 +25,22 @@ module.exports = {
             req.body,
             { runValidators: true, new: true },
         )
-            .then((updatedUserData) => res.json(updatedUserData))
+            .then((updatedUserData) =>
+                !updatedUserData
+                    ? res.status(404).json({ message: 'No user with that ID' })
+                    : res.json(updatedUserData))
             .catch((err) => res.status(500).json(err));
     },
+    // Bonus : Application deletes a user's associated thoughts when the user is deleted
     removeUser(req, res) {
-        User.deleteOne({ _id: req.params.userId })
-            .then((result) => res.json(result))
+        User.findById(req.params.userId)
+            .then((userData) =>
+                Thought.deleteMany({ _id: { $in: userData.thoughts } })
+            )
+            .then(() =>
+                User.deleteOne({ _id: req.params.userId })
+            )
+            .then((deleteUser) => res.json(deleteUser))
             .catch((err) => res.status(500).json(err));
     },
     addFriend(req, res) {

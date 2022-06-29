@@ -37,7 +37,6 @@ module.exports = {
     },
     removeThought(req, res) {
         Thought.deleteOne({ _id: req.params.thoughtId })
-            // .then((result) => res.json(result))
             .then((resutl) => User.findOneAndUpdate(
                 { thoughts: req.params.thoughtId },
                 { $pull: { thoughts: req.params.thoughtId } },
