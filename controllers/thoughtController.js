@@ -20,7 +20,7 @@ module.exports = {
         Thought.findByIdAndUpdate(
             req.params.thoughtId,
             req.body,
-            { new: true },
+            { runValidators: true, new: true },
         )
             .then((updatedThoughtData) => res.json(updatedThoughtData))
             .catch((err) => res.status(500).json(err));
@@ -31,9 +31,27 @@ module.exports = {
             .catch((err) => res.status(500).json(err));
     },
     createReaction(req, res) {
-
+        Thought.findOneAndUpdate(
+            { _id: req.params.thoughtId },
+            { $addToSet: { reactions: req.body } },
+            { runValidators: true, new: true },
+        )
+            .then((thoughtData) =>
+                !thoughtData
+                    ? res.status(404).json({ messsage: 'No thought found with that ID' })
+                    : res.json(thoughtData))
+            .catch((err) => res.status(500).json(err));
     },
     removeReaction(req, res) {
-
+        Thought.findOneAndUpdate(
+            { _id: req.params.thoughtId },
+            { $pull: { reactions: { reactionId: req.params.reactionId } } },
+            { runValidators: true, new: true },
+        )
+            .then((thoughtData) =>
+                !thoughtData
+                    ? res.status(404).json({ messsage: 'No thought found with that ID' })
+                    : res.json(thoughtData))
+            .catch((err) => res.status(500).json(err));
     },
 };
