@@ -5,18 +5,20 @@ module.exports = {
         User.find()
             .then((users) => res.json(users))
             .catch((err) => {
-                console.error({ message: err });
                 return res.status(500).json(err);
             });
     },
     getSingleUser(req, res) {
-
+        User.findById(req.params.userId)
+            .then((user) => res.json(user))
+            .catch((err) => {
+                return res.status(500).json(err);
+            });
     },
     createUser(req, res) {
         User.create(req.body)
             .then((userData) => res.json(userData))
             .catch((err) => {
-                console.error({ message: err });
                 return res.status(500).json(err);
             });
     },
