@@ -10,7 +10,12 @@ module.exports = {
             });
     },
     createThought(req, res) {
-
+        Thought.create(req.body)
+            .then((thoughtData) => res.json(thoughtData))
+            .catch((err) => {
+                console.error({ message: err });
+                return res.status(500).json(err);
+            });
     },
     getSingleThought(req, res) {
 

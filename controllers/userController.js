@@ -13,7 +13,12 @@ module.exports = {
 
     },
     createUser(req, res) {
-
+        User.create(req.body)
+            .then((userData) => res.json(userData))
+            .catch((err) => {
+                console.error({ message: err });
+                return res.status(500).json(err);
+            });
     },
     updateUser(req, res) {
 
