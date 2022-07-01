@@ -7,8 +7,10 @@ module.exports = {
             .catch((err) => res.status(500).json(err));
     },
     createThought(req, res) {
+        // Create a new Thought
         Thought.create(req.body)
             .then((thoughtData) =>
+                // Add the crdated thoght's _id to the associated user's thoughts array field
                 User.findOneAndUpdate(
                     { _id: req.body.userId },
                     { $addToSet: { thoughts: thoughtData._id } },
@@ -36,7 +38,9 @@ module.exports = {
             .catch((err) => res.status(500).json(err));
     },
     removeThought(req, res) {
+        // Delete the thought with the thoughtId
         Thought.deleteOne({ _id: req.params.thoughtId })
+            // Delete the delted thoughtId from the associated user's thoghts array
             .then((resutl) => User.findOneAndUpdate(
                 { thoughts: req.params.thoughtId },
                 { $pull: { thoughts: req.params.thoughtId } },

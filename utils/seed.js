@@ -8,6 +8,7 @@ connection.once('open', async () => {
     await User.deleteMany({});
     await Thought.deleteMany({});
 
+    // Create 3 user documents for seeds data
     const users = [
         {
             username: 'user1',

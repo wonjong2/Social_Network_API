@@ -33,10 +33,13 @@ module.exports = {
     },
     // Bonus : Application deletes a user's associated thoughts when the user is deleted
     removeUser(req, res) {
+        // Find the user document with the userId
         User.findById(req.params.userId)
+            // Delete all thoughts documents from the Thought collection with thought's _id in the user's thoguths array
             .then((userData) =>
                 Thought.deleteMany({ _id: { $in: userData.thoughts } })
             )
+            // Delete the user document with the userId
             .then(() =>
                 User.deleteOne({ _id: req.params.userId })
             )
