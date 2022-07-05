@@ -1,16 +1,19 @@
 # Social Network API
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Description
 
 Build an API for a social network web application where users can share their thoughts, react to friends' thoughts, and create a friend list.
-- Use node.js as a platform
-- Use express.js for the server operation
-- Use MongoDB for the database
-- Use Mongoose.js for the ODM(Object Document Mapper)
-- Use day.js to format timestamp
+
+-   Use node.js as a platform
+-   Use express.js for the server operation
+-   Use MongoDB for the database
+-   Use Mongoose.js for the ODM(Object Document Mapper)
+-   Use day.js to format timestamp
 
 ## Table of Contents
+
 1. [Installation](#installation)
 2. [Usage](#usage)
 3. [License](#license)
@@ -21,6 +24,7 @@ Build an API for a social network web application where users can share their th
 ## Installation
 
 On the command prompt :
+
 1. npm i
 2. node index.js
 
@@ -35,7 +39,11 @@ On the command prompt :
 4. WHEN a user tests API POST and DELETE routes in Insomnia
    THEN a user is able to successfully create and delete reactions to thoughts and add and remove friends to a userâ€™s friend list
 
-`Walkthrough Video: `
+`< Walkthrough Video >`
+
+`Video #1 : ` https://watch.screencastify.com/v/zIAbnQv0XwPNmozTyWPa
+
+`Video #2 : ` https://watch.screencastify.com/v/HMcmUdCMg6mkWe64EAwJ
 
 ## License
 
@@ -45,9 +53,9 @@ Copyright (c) 2022 `wonjong2` (GitHub Username) Licensed under [the MIT License]
 
 All your inputs are valuable and I love them.
 
-- Reporting a bug
-- Submiiting a fix
-- Proposing new features
+-   Reporting a bug
+-   Submiiting a fix
+-   Proposing new features
 
 ## Test
 
